@@ -6,7 +6,7 @@
 # include<list>
 # include<vector>
 # include<queue>
-# include <stack>
+# include<stack>
 
 
 class Graph {
@@ -49,59 +49,59 @@ class Graph {
 		}
 
 
-void BFS(int startVertex) {
-    std::queue<int> q;
-    std::vector<bool> visited(V, false); // Initialized with 'false' for all vertices.
-		
+        void BFS(int startVertex) {
+            std::queue<int> q;
+            std::vector<bool> visited(V, false); // Initialized with 'false' for all vertices.
+                
 
-	// 1. visit the node
-    visited[startVertex] = true;
-	// 2. push the node onto the queue
-    q.push(startVertex); 
+            // 1. visit the node
+            visited[startVertex] = true;
+            // 2. push the node onto the queue
+            q.push(startVertex); 
 
-    while (!q.empty()) {
-		// 3. pop the node from the queue
-        int u = q.front();
-        q.pop();
-		// 4. after popping from the queue, print it
-        std::cout << u << " "; 
+            while (!q.empty()) {
+                // 3. pop the node from the queue
+                int u = q.front();
+                q.pop();
+                // 4. after popping from the queue, print it
+                std::cout << u << " "; 
 
-        for (auto v: adjList[u]) {
-            if (!visited[v]) { // Check if 'v' has not been visited before enqueueing.
-                visited[v] = true; // Mark 'v' as visited right before pushing to the queue.
-                q.push(v);
+                for (auto v: adjList[u]) {
+                    if (!visited[v]) { // Check if 'v' has not been visited before enqueueing.
+                        visited[v] = true; // Mark 'v' as visited right before pushing to the queue.
+                        q.push(v);
+                    }
+                }
+            }
+            std::cout << std::endl; // Print a newline at the end for better formatting.
+        }
+
+        void DFSRecursion(int startVertex){
+            std::vector<bool> visited(V, false);
+            DFSutil(startVertex, visited);
+            std::cout << std::endl;
+        }
+
+        void DFSIter(int startNode) {
+        std::stack<int> stack;
+        std::vector<bool> visited(V, false);
+
+        visited[startNode] = true;
+        stack.push(startNode);
+
+        while (!stack.empty()) {
+            int u = stack.top(); // Correction: Use stack.top() followed by stack.pop()
+            stack.pop();
+            std::cout << u << " "; // Process the node
+
+            for (auto v: adjList[u]) {
+                if (!visited[v]) { 
+                    visited[v] = true; // Mark 'v' as visited right before pushing to the queue.
+                    stack.push(v);
+                }
             }
         }
     }
-    std::cout << std::endl; // Print a newline at the end for better formatting.
-	}
-
-	void DFSRecursion(int startVertex){
-		std::vector<bool> visited(V, false);
-		DFSutil(startVertex, visited);
-		std::cout << std::endl;
-	}
-
-	void DFSIter(int startNode) {
-    std::stack<int> stack;
-    std::vector<bool> visited(V, false);
-
-    visited[startNode] = true;
-    stack.push(startNode);
-
-    while (!stack.empty()) {
-        int u = stack.top(); // Correction: Use stack.top() followed by stack.pop()
-		stack.pop();
-        std::cout << u << " "; // Process the node
-
-       for (auto v: adjList[u]) {
-            if (!visited[v]) { 
-                visited[v] = true; // Mark 'v' as visited right before pushing to the queue.
-                stack.push(v);
-            }
-        }
-    }
-}
 
 };
 
