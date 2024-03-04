@@ -129,6 +129,7 @@ Node* BST::deleteNodeHelper(Node* rootNode, int value){
             // case: node with two children
             // find inorder successor
             Node* temp = minValueNode(rootNode -> rightChild);
+            // first do the replacement: find the inorder successor to replace the value
             rootNode -> value = temp -> value;
             // delete the inorder successor: back to the 0-1 child case
             rootNode -> rightChild = deleteNodeHelper(rootNode -> rightChild, temp -> value);
